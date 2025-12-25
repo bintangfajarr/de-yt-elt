@@ -3,7 +3,7 @@ import pendulum
 from datetime import datetime, timedelta
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
-from api.video_data import (
+from api.video_stats import (
     get_playlist_id,
     get_video_ids,
     extract_video_data,
@@ -11,7 +11,7 @@ from api.video_data import (
 )
 
 from datawarehouse.dwh import staging_table, core_table
-# from dataquality.soda import yt_elt_data_quality
+from dataquality.soda import yt_elt_data_quality
 
 # Define the local timezone
 local_tz = pendulum.timezone("Europe/Malta")
@@ -79,18 +79,18 @@ with DAG(
     # Define dependencies
     update_staging >> update_core >> trigger_data_quality
 
-# # DAG 3: data_quality
-# with DAG(
-#     dag_id="data_quality",
-#     default_args=default_args,
-#     description="DAG to check the data quality on both layers in the database",
-#     catchup=False,
-#     schedule=None,
-# ) as dag_quality:
+# DAG 3: data_quality
+with DAG(
+    dag_id="data_quality",
+    default_args=default_args,
+    description="DAG to check the data quality on both layers in the database",
+    catchup=False,
+    schedule=None,
+) as dag_quality:
 
-#     # Define tasks
-#     soda_validate_staging = yt_elt_data_quality(staging_schema)
-#     soda_validate_core = yt_elt_data_quality(core_schema)
+    # Define tasks
+    soda_validate_staging = yt_elt_data_quality(staging_schema)
+    soda_validate_core = yt_elt_data_quality(core_schema)
 
-#     # Define dependencies
-#     soda_validate_staging >> soda_validate_core
+    # Define dependencies
+    soda_validate_staging >> soda_validate_core
