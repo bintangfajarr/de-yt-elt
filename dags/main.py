@@ -3,7 +3,7 @@ import pendulum
 from datetime import datetime, timedelta
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
-from api.video_stats import (
+from api.video_data import (
     get_playlist_id,
     get_video_ids,
     extract_video_data,
