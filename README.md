@@ -7,7 +7,7 @@ An automated ELT (Extract, Load, Transform) data pipeline that extracts YouTube 
 ## Architecture
 
 <p align="center">
-  <img width="500" height="400" src="images/project_architecture.png" alt="Project Architecture Diagram">
+  <img width="500" height="400" src="project_architecture.png" alt="Project Architecture Diagram">
 </p>
 
 ## Motivation
