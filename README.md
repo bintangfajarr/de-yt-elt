@@ -1,5 +1,4 @@
 # YouTube API - ELT Pipeline
-
 ## Overview
 
 An automated ELT (Extract, Load, Transform) data pipeline that extracts YouTube channel statistics using the YouTube Data API, orchestrates the data workflow with Apache Airflow, and stores processed data in PostgreSQL databases. The project implements data engineering best practices including containerization, automated testing, and CI/CD workflows.
